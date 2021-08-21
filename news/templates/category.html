@@ -1,0 +1,78 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search by Category</title>
+
+  {% load static %}
+  <link rel="shortcut icon" href="{% static 'img/search.jfif' type='image/x-icon' %} ">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+body{
+  background-color: #A9F5F2;
+}
+  nav form{
+    margin-left: 600px;
+  }
+</style>
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <marquee><a class="navbar-brand">SEARCH BY CATEGORY</a></marquee>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="navbar-brand" href="{% url 'Channels' %}">CHANNELS</a>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" href="{% url 'Index' %}">HOME</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav class="navbar bg-light" style="height: 50px;">
+  <form action=" " method="get" align="center">
+    <select name="category">
+      <option value="none">-SELECT-</option>
+      <option value="sports">SPORTS</option>
+      <option value="entertainment">ENTERTAINMENT</option>
+      <option value="business">BUSINESS</option>
+      <option value="science">SCIENCE</option>
+      <option value="health">HEALTH</option>
+      <option value="technology">TECHNOLOGY</option>
+      <option value="general">GENERAL</option>
+    </select>
+    <button type="submit" value="Search" target="body">Search</button>
+  </form>
+</nav>
+<br>
+
+  <div class="container">
+  {% for i in articles %}
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card" style="width: 55rem;">
+          <img src="{{ i.urlToImage }}" class="card-img-top" alt="{{ i.source.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ i.title }}</h5>
+            <p class="card-text">{{ i.description }}</p>
+            <hr>
+            <small>{{ i.publishedAt }}</small>
+            <a href="{{ i.url }}" target="_blank" class="btn btn-primary">Read More</a>
+          <div>
+        </div>
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+
+</div>
+</body>
+</html>
